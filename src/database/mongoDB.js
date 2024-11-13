@@ -1,8 +1,16 @@
+import { config } from "dotenv";
 import mongoose from "mongoose";
+
+config();
+
+const { MONGO_URL } = process.env;
 
 const connectMongoDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URL);
+    if (!MONGO_URL) {
+      throw new Error("MongoDB URL not found");
+    }
+    await mongoose.connect(MONGO_URL);
     console.log("MongoDB connected");
   } catch (error) {
     console.error("MongoDB connection error:", error);

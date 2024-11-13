@@ -10,4 +10,8 @@ router.post("/login", (req, res) =>
   req.container.resolve("authController").login(req, res)
 );
 
+router.get("/confirm-account", (req, res) =>
+  req.container.resolve("authController").confirmAccount(req, res)
+);
+
 export default router;

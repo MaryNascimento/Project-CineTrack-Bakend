@@ -16,4 +16,18 @@ export class AuthController {
       res.status(401).json({ error: message });
     }
   }
+
+  async confirmAccount(req, res) {
+    try {
+      const { token } = req.query;
+      await this.authService.confirmAccount(token);
+      res.status(200).json({ message: "Conta confirmada com sucesso" });
+    } catch (error) {
+      let message = "Erro desconhecido";
+      if (error instanceof Error) {
+        message = error.message;
+      }
+      res.status(401).json({ error: message });
+    }
+  }
 }
