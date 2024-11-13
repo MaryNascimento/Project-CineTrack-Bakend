@@ -29,7 +29,7 @@ export class EmailService {
       from: EMAIL_USER,
       to: user.email,
       subject: "Confirme seu cadastro",
-      html: ConfirmRegisterUser(confirmUrl),
+      html: ConfirmRegisterUser(confirmUrl, user),
     };
 
     await this.transporter.sendMail(mailOptions);
@@ -45,7 +45,7 @@ export class EmailService {
       from: EMAIL_USER,
       to: user.email,
       subject: "Atualize sua senha",
-      html: UpdatePasswordTemplate(updateUrl),
+      html: UpdatePasswordTemplate(updateUrl, user),
     };
 
     await this.transporter.sendMail(mailOptions);
