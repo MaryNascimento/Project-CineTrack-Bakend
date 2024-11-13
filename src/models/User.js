@@ -7,7 +7,7 @@ const UserSchema = new Schema({
   password: { type: String, required: true, select: false },
   isVerified: { type: Boolean, default: false },
   ratings: [{ type: Schema.Types.ObjectId, ref: "Rating" }],
-  // listas: [{ type: Schema.Types.ObjectId, ref: "Lista" }],
+  lists: [{ type: Schema.Types.ObjectId, ref: "List" }],
 });
 
 UserSchema.pre("save", async function (next) {
