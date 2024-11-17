@@ -4,6 +4,7 @@ import UserRoutes from "./routes/UserRoutes.js";
 import AuthRoutes from "./routes/AuthRoutes.js";
 import MovieRoutes from "./routes/MovieRoutes.js";
 import RatingRoutes from "./routes/RatingRoutes.js";
+import ListRoutes from "./routes/ListRoutes.js";
 import { config } from "dotenv";
 
 config();
