@@ -23,5 +23,6 @@ app.use("/user", UserRoutes);
 app.use("/auth", AuthRoutes);
 app.use("/movies", MovieRoutes);
 app.use("/rating", RatingRoutes);
+app.use("/list", ListRoutes);
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
