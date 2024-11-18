@@ -1,19 +1,33 @@
 import express from "express";
-import { ListController } from "../controller/ListController.js";
-import { ListService } from "../service/ListService.js";
-import { ListRepository } from "../repository/ListRepository.js";
+import container from "../containers/index.js";
+import { scopePerRequest } from "awilix-express";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-const ListRepository = new ListRepository();
-const ListService = new ListService({ ListRepository });
-const ListController = new ListController({ ListService });
+router.use(scopePerRequest(container));
 
-router.post("/", (req, res) => ListController.createList(req, res));
-router.get("/", (req, res) => ListController.getListsByUserId(req, res));
-router.get("/:id", (req, res) => ListController.getListById(req, res));
-router.get("/all", (req, res) => ListController.getAllLists(req, res));
-router.put("/:id", (req, res) => ListController.updateList(req, res));
-router.delete("/:id", (req, res) => ListController.deleteList(req, res));
+router.post("/", authMiddleware, (req, res) =>
+  req.container.resolve("listController").createList(req, res)
+);
+router.post("/add", (req, res) =>
+  req.container.resolve("listController").addMovieToList(req, res)
+);
+
+router.get("/", authMiddleware, (req, res) =>
+  req.container.resolve("listController").getListsByUserId(req, res)
+);
+router.get("/all", authMiddleware, (req, res) =>
+  req.container.resolve("listController").getAllLists(req, res)
+);
+router.get("/:id", authMiddleware, (req, res) =>
+  req.container.resolve("listController").getListById(req, res)
+);
+router.put("/:id", authMiddleware, (req, res) =>
+  req.container.resolve("listController").updateList(req, res)
+);
+router.delete("/:id", authMiddleware, (req, res) =>
+  req.container.resolve("listController").deleteList(req, res)
+);
 
 export default router;

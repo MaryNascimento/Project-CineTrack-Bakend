@@ -1,9 +1,10 @@
 import jwt from "jsonwebtoken";
 
 export class UserService {
-  constructor({ userRepository, emailService }) {
+  constructor({ userRepository, emailService, listRepository }) {
     this.userRepository = userRepository;
     this.emailService = emailService;
+    this.listRepository = listRepository;
   }
 
   async createUser(user) {
@@ -14,6 +15,7 @@ export class UserService {
         throw new Error("Email já cadastrado");
       }
       const newUser = await this.userRepository.create(user);
+      await this.listRepository.createDefaultLists(newUser._id);
 
       this.emailService.sendConfirmationEmail(newUser).catch((error) => {
         console.error(error);

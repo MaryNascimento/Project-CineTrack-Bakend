@@ -10,6 +10,9 @@ import { RatingRepository } from "../repositories/RatingRepository.js";
 import { RatingService } from "../services/RatingService.js";
 import { RatingController } from "../controllers/RatingController.js";
 import { EmailService } from "../emails/EmailService.js";
+import { ListRepository } from "../repositories/ListRepository.js";
+import { ListService } from "../services/ListService.js";
+import { ListController } from "../controllers/ListController.js";
 
 const container = createContainer();
 
@@ -25,6 +28,9 @@ container.register({
   ratingService: asClass(RatingService).singleton(),
   ratingController: asClass(RatingController).singleton(),
   emailService: asClass(EmailService).singleton(),
+  listRepository: asClass(ListRepository).singleton(),
+  listService: asClass(ListService).singleton(),
+  listController: asClass(ListController).singleton(),
 });
 
 export default container;
