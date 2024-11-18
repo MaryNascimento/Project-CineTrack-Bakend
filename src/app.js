@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import connectMongoDB from "./database/mongoDB.js";
 import UserRoutes from "./routes/UserRoutes.js";
 import AuthRoutes from "./routes/AuthRoutes.js";
@@ -13,6 +14,13 @@ const { PORT } = process.env;
 
 //middleware
 app.use(express.json());
+
+//cors
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 //conexão com banco
 connectMongoDB();
